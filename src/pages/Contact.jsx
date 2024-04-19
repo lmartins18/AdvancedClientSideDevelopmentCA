@@ -1,6 +1,5 @@
 import { FaUser, FaEnvelope, FaComment, FaPaperPlane } from 'react-icons/fa';
 import { useForm, ValidationError } from '@formspree/react';
-
 export const Contact = () => {
     const [state, handleSubmit] = useForm("xyyrjkoz");
 
