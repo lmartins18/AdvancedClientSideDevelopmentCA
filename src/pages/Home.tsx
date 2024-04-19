@@ -1,4 +1,3 @@
-
 import '../App.css';
 
 export const Home = () => {
@@ -38,9 +37,9 @@ export const Home = () => {
   return (
     <>
       {/* Welcome Section */}
-      <section className="welcome-section bg-gray-100 dark:bg-blue-900 text-center py-12">
-        <h1 className="text-4xl font-bold mb-4 text-emerald-700">Welcome</h1>
-        <p className="text-lg text-gray-600">
+      <section className="welcome-section bg-gray-100  dark:bg-blue-900 text-center py-12">
+        <h1 className="text-4xl font-bold mb-4">Welcome</h1>
+        <p className="text-lg dark:bg-blue-900  ">
           Bored, or want to become a chef at home? Don't know what to cook? You came to the right place.
         </p>
       </section>
@@ -76,15 +75,14 @@ export const Home = () => {
       {/* Future Events Section */}
       <section className="future-events-section bg-gray-100 dark:bg-blue-900 py-12">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center text-emerald-700">Future Events</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">Future Events</h2>
           <div className="flex justify-center gap-6">
             {/* Display all future events */}
             {futureEvents.map((event, index) => (
               <div key={index} className="event-card bg-white dark:bg-blue-800 rounded-lg shadow-md p-6 flex flex-col justify-between">
-                <h3 className="text-xl font-semibold mb-2 text-green-600">{event.title}</h3>
-                <p className="text-gray-600"><span className="font-bold">Date:</span> {event.date}</p>
-                <p className="text-gray-600"><span className="font-bold">Location:</span> {event.location}</p>
-                
+                <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                <p className="bg-white dark:bg-blue-800"><span className="font-bold">Date:</span> {event.date}</p>
+                <p className="bg-white dark:bg-blue-800"><span className="font-bold">Location:</span> {event.location}</p>
               </div>
             ))}
           </div>
@@ -92,7 +90,7 @@ export const Home = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="footer bg-emerald-500 dark:bg-blue-900 text-white py-4 text-center">
+      <footer className="footer bg-blue-600 dark:bg-blue-900 text-white py-4 text-center">
         <p>&copy; Luis Martins & George Carp 2024</p>
       </footer>
     </>
