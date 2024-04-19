@@ -7,11 +7,11 @@ import { Suspense, useContext, useEffect, useRef } from "react";
 import { MealContext } from "../contexts/meal-context";
 import { lazy } from "react";
 import { Spinner } from "./Spinner";
-import { AiFillStar } from "react-icons/ai";
+import { MdClose } from "react-icons/md";
 
 export const Recipe = ({ meal }: { meal?: Meal }) => {
   const recipeBody = useRef<HTMLDivElement>(null);
-  const { currentMeal } = useContext(MealContext);
+  const { currentMeal, changeCurrentMeal } = useContext(MealContext);
   const MealYoutubeIframe = lazy(() => import("./MealYoutubeIframe"));
 
   useEffect(() => {
@@ -23,11 +23,12 @@ export const Recipe = ({ meal }: { meal?: Meal }) => {
       className="h-full w-full px-6 pt-6 pb-2 bg-inherit dark:bg-inherit overflow-auto"
       ref={recipeBody}
     >
-
-      <h1 data-test="recipe-title" className="text-xl text-inherit dark:text-inherit pb-6 underline underline-offset-8 text-center sm:text-start flex gap-3">
-        {meal?.name}
-        <AiFillStar className="my-auto hover:cursor-pointer hover:text-yellow-400" />
-      </h1>
+      <span className="flex flex-row justify-between">
+        <h1 data-test="recipe-title" className="text-xl text-inherit dark:text-inherit pb-6 underline underline-offset-8 text-center sm:text-start gap-3">
+          {meal?.name}
+        </h1>
+        <MdClose className="cursor-pointer text-xl" onClick={() => changeCurrentMeal(undefined)}/>
+      </span>
 
       <div className="flex flex-col">
         <div className="flex flex-col sm:flex-row whitespace-pre-wrap break-words">

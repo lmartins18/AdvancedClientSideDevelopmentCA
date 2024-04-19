@@ -7,23 +7,37 @@ interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   icon: IconType;
   title: string;
   items: any[];
-  isOpen: boolean;
-  toggleIsOpen: () => void;
 }
 
-export const Dropdown = ({ icon: Icon, title, items, isOpen, toggleIsOpen, ...rest }: DropdownProps) => {
+export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) => {
   const dataTestTitle = title.toLowerCase();
+  const [isOpen, setIsOpen] = useState(false);
   const showItems = isOpen ? "block" : "hidden";
+  const catMenu = useRef<any>(null);
+
+  useEffect(() => {
+    const closeOpenMenus = (e: any) => {
+      if (catMenu.current && isOpen && !catMenu.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", closeOpenMenus, false);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", closeOpenMenus, false);
+    };
+  }, [isOpen]);
 
   return (
-    <div className="flex flex-col flex-1 sm:m-auto relative">
+    <div className="flex flex-col flex-1 sm:m-auto relative" ref={catMenu}>
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
         data-test={`${dataTestTitle}-dropdown`}
         className="flex items-center w-full p-2 transition duration-75 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700"
         type="button"
-        onClick={toggleIsOpen}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <Icon />
         <span className="flex-1 ml-3 text-left whitespace-nowrap">{title}</span>

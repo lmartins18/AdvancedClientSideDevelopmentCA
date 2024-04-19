@@ -7,6 +7,8 @@ import { Spinner } from "../components/Spinner";
 import { RecipesContext } from '../contexts/recipes-context/RecipesContextProvider';
 import uniqid from 'uniqid';
 import { FaArrowAltCircleUp } from 'react-icons/fa';
+import { MealContext } from '../contexts/meal-context';
+import { Recipe } from '../components/Recipe';
 
 // TODO move this outta here.
 interface recipe {
@@ -16,15 +18,11 @@ interface recipe {
 
 export const Search = () => {
     const { apiParams } = useContext(RecipesContext);
+    const { currentMeal } = useContext(MealContext);
     const [recipes, setRecipes] = useState<recipe[] | null>(null);
     const modalBody = useRef<HTMLDivElement>(null);
     const [scroll, setScroll] = useState(false);
     const [loading, setLoading] = useState(true);
-    // Dropdowns
-    const [cuisineDDFlag, setCuisineDDFlag] = useState(false);
-    const [ingredientsDDFlag, setIngredientsDDFlag] = useState(false);
-    const [categoriesDDFlag, setCategoriesDDFlag] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () =>
@@ -52,18 +50,14 @@ export const Search = () => {
         fetchData();
     }, [apiParams]);
 
-    const handleScroll = (e: any) => {
-        setScroll(e.target.scrollTop > 500);
-    };
-    const returnToTop = () => {
-        if (scroll && modalBody.current) modalBody.current.scrollTop = 0;
-    };
-    return (
-        <div className="flex flex-col flex-1">
+
+    const SearchBody = () =>
+    (
+        <>
             <div className="flex flex-col sm:flex-row">
-                <CategoriesDropDown isOpen={categoriesDDFlag} toggleIsOpen={() => setCategoriesDDFlag(!categoriesDDFlag)} />
-                <CuisinesDropDown isOpen={cuisineDDFlag} toggleIsOpen={() => setCuisineDDFlag(!cuisineDDFlag)} />
-                <IngredientsDropdown isOpen={ingredientsDDFlag} toggleIsOpen={() => setIngredientsDDFlag(!ingredientsDDFlag)} />
+                <CategoriesDropDown />
+                <CuisinesDropDown />
+                <IngredientsDropdown />
                 <span className="flex flex-1 sm:flex-grow-[2]">
                     <SearchBar />
                 </span>
@@ -81,7 +75,6 @@ export const Search = () => {
                 <div
                     id="modal-body"
                     ref={modalBody}
-                    onScroll={handleScroll}
                     className="grid grid-flow-row sm:grid-cols-auto p-6 overflow-auto flex-wrap h-full scroll-smooth mb-1"
                 >
                     {recipes.map((recipe) => (
@@ -91,21 +84,19 @@ export const Search = () => {
                             key={uniqid()}
                         />
                     ))}
-                </div>
-            )}
+                </div>)
+            }
+        </>
 
-            <div
-                id="scroll-to-top-button-container"
-                className={`absolute bottom-2 right-4 text-3xl ${!scroll && " hidden"
-                    }`}
-            >
-                <button
-                    onClick={returnToTop}
-                    className="dark:text-slate-500 dark:hover:text-slate-200"
-                >
-                    <FaArrowAltCircleUp />
-                </button>
-            </div>
+    );
+
+    
+    return (
+        <div className="flex flex-col flex-1 overflow-auto">
+            {currentMeal
+                ? <Recipe meal={currentMeal} />
+                : <SearchBody />
+            }
         </div >
 
     )

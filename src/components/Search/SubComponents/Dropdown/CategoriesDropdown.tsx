@@ -6,10 +6,7 @@ import { DropdownStringItem } from "./DropdownStringItem";
 import uniqid from "uniqid";
 import { CategoriesContext } from "../../../../contexts/categories-context";
 
-export const CategoriesDropDown = ({ isOpen, toggleIsOpen }: {
-  isOpen: boolean;
-  toggleIsOpen: () => void;
-}) => {
+export const CategoriesDropDown = () => {
   const categories = useContext(CategoriesContext);
   const categoriesElements = categories.map((category) => (
     <DropdownStringItem key={uniqid()} item={category} type={"category"} />
@@ -19,8 +16,6 @@ export const CategoriesDropDown = ({ isOpen, toggleIsOpen }: {
       icon={BiCategoryAlt}
       title={"Categories"}
       items={categoriesElements}
-      isOpen={isOpen}
-      toggleIsOpen={toggleIsOpen}
     />
   );
 };
