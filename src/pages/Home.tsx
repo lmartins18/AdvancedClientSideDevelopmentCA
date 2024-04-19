@@ -1,8 +1,8 @@
-import React from 'react';
+
 import '../App.css';
 
 export const Home = () => {
-  // Sample data for seminar categories
+  // Data for seminar categories
   const seminarCategories = [
     "Healthy Cooking",
     "Italian Cuisine",
@@ -11,7 +11,7 @@ export const Home = () => {
     "Baking Masterclass"
   ];
 
-  // Sample data for future events
+  // Data for future events
   const futureEvents = [
     {
       title: "Mastering Pasta Making",
