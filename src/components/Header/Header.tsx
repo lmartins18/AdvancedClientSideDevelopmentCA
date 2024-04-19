@@ -3,6 +3,8 @@ import { Title } from "../Title";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 import { GrClose } from "react-icons/gr";
+import { HeaderLink } from './SubComponents/HeaderLink';
+import { Search } from '../../pages/Search';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,16 +27,16 @@ export const Header = () => {
           >
             <ul className="flex flex-col p-4 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 bg-slate-800 md:bg-slate-900 border-slate-700 !text-white dark:hover:!text-sky-400">
               <li>
-                <a href="/" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+                <HeaderLink path={"/"} name={"Home"} />
               </li>
               <li>
-                <a href="/search" className="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Search</a>
+                <HeaderLink path={"/search"} name={"Search"} />
               </li>
               <li>
-                <a href="/random" className="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Random</a>
+                <HeaderLink path={"/random"} name={"Random"} />
               </li>
               <li>
-                <a href="/contact" className="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                <HeaderLink path={"/contact"} name={"Contact"} />
               </li>
             </ul>
           </div>
