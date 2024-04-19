@@ -49,7 +49,7 @@ export const Random = () => {
           });
         });
     }
-  }, []);
+  }, [changeCurrentMeal, currentMeal]);
 
   return <Recipe meal={currentMeal} />;
 };

@@ -24,9 +24,9 @@ export const Recipe = ({ meal }: { meal?: Meal }) => {
       ref={recipeBody}
     >
 
-        <h1 data-test="recipe-title" className="text-xl text-inherit dark:text-inherit pb-6 underline underline-offset-8 text-center sm:text-start flex gap-3">
-          {meal?.name}
-          <AiFillStar className="my-auto hover:cursor-pointer hover:text-yellow-400" />
+      <h1 data-test="recipe-title" className="text-xl text-inherit dark:text-inherit pb-6 underline underline-offset-8 text-center sm:text-start flex gap-3">
+        {meal?.name}
+        <AiFillStar className="my-auto hover:cursor-pointer hover:text-yellow-400" />
       </h1>
 
       <div className="flex flex-col">
@@ -36,7 +36,7 @@ export const Recipe = ({ meal }: { meal?: Meal }) => {
               <img
                 className="w-[24rem] h-[24rem] border-double border-8 border-slate-900 dark:border-slate-100 rounded object-fill"
                 src={meal.mealThumb}
-                alt={`${meal.name} picture`}
+                alt={`${meal.name}`}
               />
             )}
             <div className="flex flex-col pt-6 justify-between">

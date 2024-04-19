@@ -12,7 +12,7 @@ export const RecipeModalItem = ({
 }) => {
   const { changeCurrentMeal } = useContext(MealContext);
   const { toggleIsOpen } = useContext(RecipesDialogContext);
-  
+
   // TODO: change code below to use id instead of name.
   const fetchNewRecipe = () => {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
@@ -68,7 +68,7 @@ export const RecipeModalItem = ({
         <img
           className="w-64 sm:w-32 mb-3 border-double border-8 border-slate-900 dark:border-slate-100 rounded object-fill m-auto"
           src={mealImgSrc}
-          alt={`${mealName} picture`}
+          alt={`${mealName}`}
         />
       )}
       <h1 className="text-inherit dark:text-slate-200 text-center line-clamp-1">

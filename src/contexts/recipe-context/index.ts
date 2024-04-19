@@ -1,2 +1,1 @@
-export { MealContextProvider } from "./MealContextProvider";
-export { MealContext } from "./MealContext";
+export { MealContextProvider, MealContext } from "./MealContextProvider";

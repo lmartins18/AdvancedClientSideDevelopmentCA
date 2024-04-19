@@ -17,11 +17,11 @@ export const DropdownStringItem = ({ item, type }: DropdownStringItemProps) => {
     changeFilter({ type: "filter", argument: `${filter}=${item}` });
   };
   return (
-    <a
+    <p
       className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 p-2 cursor-pointer`}
       onClick={fetchRecipes}
     >
-      <p>{item}</p>
-    </a>
+      {item}
+    </p>
   );
 };

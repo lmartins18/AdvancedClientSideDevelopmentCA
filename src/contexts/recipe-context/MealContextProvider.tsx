@@ -1,6 +1,10 @@
-import { useState, FC, ReactNode } from "react";
-import { MealContext } from ".";
+import { useState, FC, ReactNode, createContext } from "react";
 import { Meal } from "../../Entities/Meal";
+
+interface MealContextType {
+  currentMeal: Meal | undefined;
+  changeCurrentMeal: (meal: Meal | undefined) => void;
+}
 
 export const MealContextProvider: FC<{ children: ReactNode }> = ({
   children,
@@ -15,3 +19,12 @@ export const MealContextProvider: FC<{ children: ReactNode }> = ({
     </MealContext.Provider>
   );
 };
+
+
+const defaultValue: MealContextType = {
+  currentMeal: undefined,
+  changeCurrentMeal: (meal: Meal | undefined) => {
+  },
+};
+
+export const MealContext = createContext(defaultValue);

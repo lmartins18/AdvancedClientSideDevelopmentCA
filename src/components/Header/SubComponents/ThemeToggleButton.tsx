@@ -17,7 +17,7 @@ export const ThemeToggleButton = () => {
       const savedTheme = localStorage.getItem("theme") || "light";
       changeCurrentTheme(savedTheme as "light" | "dark");
     }
-  }, []);
+  }, [changeCurrentTheme]);
 
   return (
     <button onClick={changeTheme} title="Toggle Theme" className="text-inherit">
