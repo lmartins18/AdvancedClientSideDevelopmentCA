@@ -4,7 +4,7 @@ import { IngredientsList } from "./IngredientsList";
 import { BiCameraMovie } from "react-icons/bi";
 import { HrWithIcon } from "./HrWithIcon";
 import { Suspense, useContext, useEffect, useRef } from "react";
-import { MealContext } from "../contexts/recipe-context";
+import { MealContext } from "../contexts/meal-context";
 import { lazy } from "react";
 import { Spinner } from "./Spinner";
 import { AiFillStar } from "react-icons/ai";

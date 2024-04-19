@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { MealIngredient } from "../Entities/Meal";
 import { Recipe } from "../components/Recipe";
-import { MealContext } from "../contexts/recipe-context";
+import { MealContext } from "../contexts/meal-context";
 
 export const Random = () => {
   const { currentMeal, changeCurrentMeal } = useContext(MealContext);

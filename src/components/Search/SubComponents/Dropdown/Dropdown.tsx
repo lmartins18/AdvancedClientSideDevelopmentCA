@@ -7,46 +7,30 @@ interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   icon: IconType;
   title: string;
   items: any[];
+  isOpen: boolean;
+  toggleIsOpen: () => void;
 }
 
-export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) => {
+export const Dropdown = ({ icon: Icon, title, items, isOpen, toggleIsOpen, ...rest }: DropdownProps) => {
   const dataTestTitle = title.toLowerCase();
-  const [isOpen, setIsOpen] = useState(false);
   const showItems = isOpen ? "block" : "hidden";
-  const catMenu = useRef<any>(null);
-  
-  useEffect(() => {
-    const closeOpenMenus = (e: any) => {
-      if (catMenu.current && isOpen && !catMenu.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
 
-    document.addEventListener("mouseup", closeOpenMenus);
-
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      document.removeEventListener("mouseup", closeOpenMenus);
-    };
-  }, [isOpen]);
-  
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 sm:m-auto relative">
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
         data-test={`${dataTestTitle}-dropdown`}
         className="flex items-center w-full p-2 transition duration-75 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700"
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        ref={catMenu}
+        onClick={toggleIsOpen}
       >
         <Icon />
         <span className="flex-1 ml-3 text-left whitespace-nowrap">{title}</span>
         {isOpen ? <FiChevronUp /> : <FiChevronDown />}
       </button>
       <div
-        className={`dropdown z-10 bg-white rounded-lg shadow dark:bg-gray-700 w-auto ${showItems}`}
+        className={`absolute dropdown z-10 bg-white rounded-lg shadow dark:bg-gray-700 w-full ${showItems} top-10`}
         {...rest}
       >
         <ul

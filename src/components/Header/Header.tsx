@@ -4,7 +4,6 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { HeaderLink } from './SubComponents/HeaderLink';
-import { Search } from '../../pages/Search';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);

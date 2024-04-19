@@ -1,18 +1,16 @@
 import { useContext } from "react";
-import { RecipesDialogContext } from "../../../../../contexts/recipes-dialog-context/RecipesDialogContextProvider";
+import { RecipesContext } from "../../../../../contexts/recipes-context/RecipesContextProvider";
 
 export const Cuisine = ({ cuisine }: { cuisine: string }) => {
-  const { toggleIsOpen, changeApiParams: changeFilter } =useContext(RecipesDialogContext);
+  const { changeApiParams } = useContext(RecipesContext);
   const imgUrl = `${process.env.PUBLIC_URL}/img/flags/${cuisine}.svg`
   const fetchRecipes = () => {
-    // Open modal.
-    toggleIsOpen();
     // Fetch recipes.
-    changeFilter({ type: "filter", argument: `a=${cuisine}` });
+    changeApiParams({ type: "filter", argument: `a=${cuisine}` });
   };
   return (
     <p
-      className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 hover:cursor-pointer px-2`}
+      className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 hover:cursor-pointer px-2 items-center`}
       onClick={fetchRecipes}
     >
       <img

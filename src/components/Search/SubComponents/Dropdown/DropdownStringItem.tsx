@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { RecipesDialogContext } from "../../../../contexts/recipes-dialog-context/RecipesDialogContextProvider";
+import { RecipesContext } from "../../../../contexts/recipes-context/RecipesContextProvider";
 
 interface DropdownStringItemProps {
   item: string;
@@ -7,18 +7,15 @@ interface DropdownStringItemProps {
 }
 
 export const DropdownStringItem = ({ item, type }: DropdownStringItemProps) => {
-  const { toggleIsOpen, changeApiParams: changeFilter } =
-    useContext(RecipesDialogContext);
+  const { changeApiParams: changeFilter } = useContext(RecipesContext);
   const fetchRecipes = () => {
     const filter = type === "ingredient" ? "i" : "c";
-    // Open modal.
-    toggleIsOpen();
     // Fetch recipes.
     changeFilter({ type: "filter", argument: `${filter}=${item}` });
   };
   return (
     <p
-      className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 p-2 cursor-pointer`}
+      className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 p-2 cursor-pointer z-50`}
       onClick={fetchRecipes}
     >
       {item}

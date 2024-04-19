@@ -1,22 +1,21 @@
 import { useContext } from "react";
-import { RecipesDialogContext } from "../../../contexts/recipes-dialog-context/RecipesDialogContextProvider";
+import { RecipesContext } from "../../../contexts/recipes-context/RecipesContextProvider";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 
 export const SearchBar = () => {
-  const { toggleIsOpen, changeApiParams: changeFilter } = useContext(RecipesDialogContext);
+  const { changeApiParams: changeFilter } = useContext(RecipesContext);
   // TODO: handle type below.
   const search = (e: any) => {
-    if (e.key === "Enter") {
+    if (e.type === "click" || (e.type === "keyup" && e.key === "Enter")) {
       changeFilter({ type: "search", argument: `s=${e.target.value}` });
-      toggleIsOpen();
     }
   };
   return (
-    <div className="relative m-1 flex flex-col flex-grow-[2]">
-      <div className="absolute top-3 left-3 flex items-center pointer-events-none">
+    <div className="relative m-auto flex flex-row flex-1 gap-1 p-1">
+      <div className="absolute top-4 left-3 flex items-center pointer-events-none">
         <FaMagnifyingGlass />
-      </div>
+    </div>
       <input
         type="text"
         id="search-navbar"
@@ -24,6 +23,9 @@ export const SearchBar = () => {
         placeholder="Search..."
         onKeyUp={search}
       />
+      <button type="button" className="text-white bg-blue-600 hover:bg-blue-700 rounded p-2" onClick={search}>
+        Go
+      </button>
     </div>
   );
 };

@@ -5,7 +5,10 @@ import { Cuisine } from "./Cuisine";
 import { useContext } from "react";
 import { CuisinesContext } from "../../../../../contexts/cuisines-context";
 
-export const CuisinesDropDown = () => {
+export const CuisinesDropDown = ({ isOpen, toggleIsOpen }: {
+  isOpen: boolean;
+  toggleIsOpen: () => void;
+}) => {
   const cuisines = useContext(CuisinesContext);
   const cuisineElements = cuisines.map((cuisine) => (
     <Cuisine key={uniqid()} cuisine={cuisine} />
@@ -14,7 +17,6 @@ export const CuisinesDropDown = () => {
     <Dropdown
       icon={BiWorld}
       title={"Cuisines"}
-      items={cuisineElements}
-    />
+      items={cuisineElements} isOpen={isOpen} toggleIsOpen={toggleIsOpen}    />
   );
 };

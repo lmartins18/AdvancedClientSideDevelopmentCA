@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from './Home';
 import { Random } from "./Random";
-import { Contact } from "./Contact";
 import { Search } from "./Search";
+import { Contact } from "./Contact";
 
 export const AppRoutes = () => (
     <Routes>

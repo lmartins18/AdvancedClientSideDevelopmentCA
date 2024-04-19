@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { MealContext } from "../contexts/recipe-context";
+import { MealContext } from "../contexts/meal-context";
 import { MealIngredient } from "../Entities/Meal";
-import { RecipesDialogContext } from "../contexts/recipes-dialog-context/RecipesDialogContextProvider";
 
 export const RecipeModalItem = ({
   mealName,
@@ -11,7 +10,6 @@ export const RecipeModalItem = ({
   mealImgSrc: string;
 }) => {
   const { changeCurrentMeal } = useContext(MealContext);
-  const { toggleIsOpen } = useContext(RecipesDialogContext);
 
   // TODO: change code below to use id instead of name.
   const fetchNewRecipe = () => {
@@ -54,7 +52,6 @@ export const RecipeModalItem = ({
           creativeCommonsConfirmed: meal.strCreativeCommonsConfirmed,
           dateModified: meal.dateModified,
         });
-        toggleIsOpen();
       });
   };
   return (
