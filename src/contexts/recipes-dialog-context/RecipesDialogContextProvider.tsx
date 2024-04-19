@@ -1,5 +1,4 @@
 import { useState, FC, ReactNode, createContext } from "react";
-import { RecipesDialog } from "../../components/RecipesDialog";
 import { apiParams } from "../apiParams";
 
 interface RecipesDialogContextProps {
@@ -34,13 +33,6 @@ export const RecipesDialogContextProvider: FC<{ children: ReactNode }> = ({
       value={{ toggleIsOpen, isOpen, changeApiParams: changeApiParams }}
     >
       {children}
-      {isOpen && (
-        <RecipesDialog
-          apiParams={apiParams}
-          toggleIsOpen={toggleIsOpen}
-          isOpen={isOpen}
-        />
-      )}
     </RecipesDialogContext.Provider>
   );
 };

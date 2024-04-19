@@ -2,12 +2,8 @@ import { useContext } from "react";
 import { RecipesDialogContext } from "../../../../../contexts/recipes-dialog-context/RecipesDialogContextProvider";
 
 export const Cuisine = ({ cuisine }: { cuisine: string }) => {
-  const { toggleIsOpen, changeApiParams: changeFilter } =
-    useContext(RecipesDialogContext);
-  const imgUrl = new URL(
-    `../../../../../assets/img/flags/${cuisine}.svg`,
-    import.meta.url
-  ).href;
+  const { toggleIsOpen, changeApiParams: changeFilter } =useContext(RecipesDialogContext);
+  const imgUrl = `${process.env.PUBLIC_URL}/img/flags/${cuisine}.svg`
   const fetchRecipes = () => {
     // Open modal.
     toggleIsOpen();
@@ -15,7 +11,7 @@ export const Cuisine = ({ cuisine }: { cuisine: string }) => {
     changeFilter({ type: "filter", argument: `a=${cuisine}` });
   };
   return (
-    <a
+    <p
       className={`flex gap-3 [&>*]:my-auto hover:bg-slate-200 hover:dark:bg-slate-600 hover:cursor-pointer px-2`}
       onClick={fetchRecipes}
     >
@@ -25,7 +21,7 @@ export const Cuisine = ({ cuisine }: { cuisine: string }) => {
         className="h-10 w-10"
         loading="lazy"
       />
-      <p>{cuisine}</p>
-    </a>
+      {cuisine}
+    </p>
   );
 };

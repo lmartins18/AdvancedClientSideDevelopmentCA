@@ -31,7 +31,7 @@ export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) =
   }, [isOpen]);
   
   return (
-    <>
+    <div className="flex flex-col flex-1">
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
@@ -46,7 +46,7 @@ export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) =
         {isOpen ? <FiChevronUp /> : <FiChevronDown />}
       </button>
       <div
-        className={`dropdown z-10 bg-white rounded-lg shadow dark:bg-gray-700 ${showItems}`}
+        className={`dropdown z-10 bg-white rounded-lg shadow dark:bg-gray-700 w-auto ${showItems}`}
         {...rest}
       >
         <ul
@@ -55,7 +55,6 @@ export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) =
         >
           {items.map((item) => (
             <li
-              
               data-test={`${dataTestTitle}-dropdown-item`}
               key={uniqid()}
             >
@@ -64,6 +63,6 @@ export const Dropdown = ({ icon: Icon, title, items, ...rest }: DropdownProps) =
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
