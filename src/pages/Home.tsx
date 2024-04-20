@@ -1,5 +1,3 @@
-import '../App.css';
-
 export const Home = () => {
   // Data for seminar categories
   const seminarCategories = [

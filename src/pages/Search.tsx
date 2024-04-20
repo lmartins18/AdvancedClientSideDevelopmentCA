@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect, useContext } from 'react';
 import { RecipeModalItem } from "../components/RecipeDialogItem";
 import { CategoriesDropDown, CuisinesDropDown, IngredientsDropdown } from "../components/Search/SubComponents"
@@ -6,34 +7,42 @@ import noDataImg from "../img/no-data.svg";
 import { Spinner } from "../components/Spinner";
 import { RecipesContext } from '../contexts/recipes-context/RecipesContextProvider';
 import uniqid from 'uniqid';
-import { FaArrowAltCircleUp } from 'react-icons/fa';
 import { MealContext } from '../contexts/meal-context';
-import { Recipe } from '../components/Recipe';
+import { RecipePage } from '../components/RecipePage';
+import { getUserCountry } from '../components/getUserCountry';
+import { countryCuisineMap } from '../data/CountryCuisineMap';
+import { Recipe } from '../Entities/Meal';
 
-// TODO move this outta here.
-interface recipe {
-    mealName: string;
-    mealImgSrc: string;
-}
 
 export const Search = () => {
-    const { apiParams } = useContext(RecipesContext);
+    const { apiParams, changeApiParams } = useContext(RecipesContext);
     const { currentMeal } = useContext(MealContext);
-    const [recipes, setRecipes] = useState<recipe[] | null>(null);
+    const [recipes, setRecipes] = useState<Recipe[] | null>(null);
     const modalBody = useRef<HTMLDivElement>(null);
-    const [scroll, setScroll] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    // To get the users cuisine based on ip location
+    useEffect(() => {
+        const getUserCuisine = async () => {
+            const country = await getUserCountry();
+            if (!country) return;
+
+            const cuisine = countryCuisineMap[country];
+            changeApiParams({ type: "filter", argument: `a=${cuisine}` });
+        };
+        getUserCuisine();
+    }, [])
+
+    // Change data on-screen when params change.
     useEffect(() => {
         const fetchData = async () =>
             await fetch(
                 `https://www.themealdb.com/api/json/v1/1/${apiParams.type}.php?${apiParams.argument}`
             )
                 .then((resp) => resp.json())
-                // TODO this needs a type, same type as in Home component;
                 .then((res: any) => {
                     // Dry this
-                    let recipes: recipe[] = [];
+                    let recipes: Recipe[] = [];
                     if (!res.meals) {
                         setRecipes(null);
                         return;
@@ -46,7 +55,7 @@ export const Search = () => {
                     });
                     setRecipes(recipes);
                     setLoading(false);
-                });
+                }).catch(() => { });
         fetchData();
     }, [apiParams]);
 
@@ -87,14 +96,12 @@ export const Search = () => {
                 </div>)
             }
         </>
-
     );
 
-    
     return (
         <div className="flex flex-col flex-1 overflow-auto">
             {currentMeal
-                ? <Recipe meal={currentMeal} />
+                ? <RecipePage meal={currentMeal} closeBtn />
                 : <SearchBody />
             }
         </div >

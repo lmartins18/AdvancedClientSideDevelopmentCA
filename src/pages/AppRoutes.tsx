@@ -11,5 +11,4 @@ export const AppRoutes = () => (
         <Route path="/random" element={<Random/>} />
         <Route path="/contact" element={<Contact />} />
     </Routes>
-
 )

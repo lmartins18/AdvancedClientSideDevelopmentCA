@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { MealIngredient } from "../Entities/Meal";
-import { Recipe } from "../components/Recipe";
+import { RecipePage } from "../components/RecipePage";
 import { MealContext } from "../contexts/meal-context";
 
 export const Random = () => {
@@ -12,7 +12,6 @@ export const Random = () => {
       fetch("https://www.themealdb.com/api/json/v1/1/random.php")
         .then((resp) => resp.json())
         .then((res) => {
-          // TODO dry this
           res.meals.forEach((meal: any) => {
             // Get ingredients
             let ingredients: MealIngredient[] = [];
@@ -29,7 +28,6 @@ export const Random = () => {
                 }
               }
             }
-            // TODO: dry this.
             changeCurrentMeal({
               id: meal.idMeal,
               name: meal.strMeal,
@@ -47,9 +45,9 @@ export const Random = () => {
               dateModified: meal.dateModified,
             });
           });
-        });
+        }).catch(() => {});
     }
-  }, [changeCurrentMeal, currentMeal]);
+  }, []);
 
-  return <Recipe meal={currentMeal} />;
+  return <RecipePage meal={currentMeal} />;
 };

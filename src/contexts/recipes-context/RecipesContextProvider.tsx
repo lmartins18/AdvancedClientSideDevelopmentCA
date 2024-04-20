@@ -19,7 +19,6 @@ export const RecipesContextProvider: FC<{ children: ReactNode }> = ({
     argument: "",
   });
 
-  // TODO: instead of just assigning a new value, accept 2 arguments, on for type "cusine | ingredient | category" and another for the value.
   const changeApiParams = (param: apiParams) => {
     setApiParams(param)
   };

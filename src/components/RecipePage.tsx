@@ -9,7 +9,7 @@ import { lazy } from "react";
 import { Spinner } from "./Spinner";
 import { MdClose } from "react-icons/md";
 
-export const Recipe = ({ meal }: { meal?: Meal }) => {
+export const RecipePage = ({ meal, closeBtn }: { meal?: Meal; closeBtn?: boolean }) => {
   const recipeBody = useRef<HTMLDivElement>(null);
   const { currentMeal, changeCurrentMeal } = useContext(MealContext);
   const MealYoutubeIframe = lazy(() => import("./MealYoutubeIframe"));
@@ -27,7 +27,9 @@ export const Recipe = ({ meal }: { meal?: Meal }) => {
         <h1 data-test="recipe-title" className="text-xl text-inherit dark:text-inherit pb-6 underline underline-offset-8 text-center sm:text-start gap-3">
           {meal?.name}
         </h1>
-        <MdClose className="cursor-pointer text-xl" onClick={() => changeCurrentMeal(undefined)}/>
+        {closeBtn &&
+          <MdClose className="cursor-pointer text-xl" onClick={() => changeCurrentMeal(undefined)} />
+        }
       </span>
 
       <div className="flex flex-col">

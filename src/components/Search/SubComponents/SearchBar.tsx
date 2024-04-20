@@ -5,7 +5,6 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export const SearchBar = () => {
   const { changeApiParams: changeFilter } = useContext(RecipesContext);
-  // TODO: handle type below.
   const search = (e: any) => {
     if (e.type === "click" || (e.type === "keyup" && e.key === "Enter")) {
       changeFilter({ type: "search", argument: `s=${e.target.value}` });
